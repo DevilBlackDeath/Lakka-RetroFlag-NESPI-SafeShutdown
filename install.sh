@@ -4,8 +4,8 @@
 TIMEZONE_FILE="/storage/.cache/timezone"
 DEFAULT_TIMEZONE="America/Regina"
 GIT_NAME="Lakka-RetroFlag-NESPI-SafeShutdown"
-MASTER_ARCHIVE_FILE="${GIT_NAME}.zip"
-MASTER_ARCHIVE_URL="https://github.com/DevilBlackDeath/${GIT_NAME}/archive/master.zip"
+MASTER_ARCHIVE_FILE="\${GIT_NAME}.zip"
+MASTER_ARCHIVE_URL="https://github.com/DevilBlackDeath/\${GIT_NAME}/archive/master.zip"
 AUTOSTART_SCRIPT="/storage/.config/autostart.sh"
 TMP_DIR="/storage/.tmp"
 PYTHON_LAKKASCRIPT_CMD="(cd /storage/scripts && python /storage/scripts/safe_shutdown.py &)"
@@ -39,7 +39,7 @@ mkdir -p /storage/scripts
 mv ./scripts/* /storage/scripts/
 
 # Set autostart
-echo "${PYTHON_LAKKASCRIPT_CMD}" >> "${AUTOSTART_SCRIPT}"
+echo eval "${PYTHON_LAKKASCRIPT_CMD}" >> "${AUTOSTART_SCRIPT}"
 
 # Writing GPIO poweroff informations
 mount -o remount, rw /flash
