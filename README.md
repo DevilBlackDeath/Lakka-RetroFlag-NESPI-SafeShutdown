@@ -22,6 +22,7 @@ Works on NESPi 4 only with Lakka nightlies dating ??? (pull request still in pro
    For Windows, use the PuTTY SSH client
    
 1. Type :
+   
    `wget -O - "https://github.com/DevilBlackDeath/lakka-retroflag-nespi-safeshutdown/raw/master/install.sh" | bash`
 
 # Credits
