@@ -4,13 +4,13 @@
 TIMEZONE_FILE="/storage/.cache/timezone"
 DEFAULT_TIMEZONE="America/Regina"
 GIT_NAME="lakka-retroflag-nespi-safeshutdown"
-MASTER_ARCHIVE_FILE=${GIT_NAME}.zip
+MASTER_ARCHIVE_FILE="${GIT_NAME}.zip"
 MASTER_ARCHIVE_URL="https://github.com/DevilBlackDeath/${GIT_NAME}/archive/master.zip"
 AUTOSTART_SCRIPT="/storage/.config/autostart.sh"
 TMP_DIR="/storage/.tmp"
 PYTHON_LAKKASCRIPT_CMD="(cd /storage/scripts && python /storage/scripts/safe_shutdown.py &)"
 GPIO_POWEROFF_CONFIG="dtoverlay=gpio-poweroff,gpiopin=4,active_low=1,input=1"
-SCRIPT_FOLDER="/storage/scripts"
+SCRIPT_FOLDER="/storage/scripts/"
 CONFLICT_README="conflict.txt"
 PICONFIG_FILE="/flash/config.txt"
 
@@ -36,7 +36,7 @@ unzip -o "${MASTER_ARCHIVE_FILE}"
 rm "${MASTER_ARCHIVE_FILE}"
 cd ${GIT_NAME}-master/
 mkdir -p /storage/scripts
-(shopt -s dotglob; mv ./scripts/* /storage/scripts/) 
+mv ./scripts/* /storage/scripts/
 
 # Set autostart
 echo "${PYTHON_LAKKASCRIPT_CMD}" >> "${AUTOSTART_SCRIPT}"
@@ -49,7 +49,7 @@ echo "${GPIO_POWEROFF_CONFIG}" >> "${PICONFIG_FILE}"
 mount -o remount,ro /flash
 
 # Check success
-if grep -Fxq "${PYTHON_LAKKASCRIPT_CMD}" "${AUTOSTART_SCRIPT}" && grep -Fxq "${GPIO_POWEROFF_CONFIG}" "${PICONFIG_FILE}"
+if grep -Fxq "${PYTHON_LAKKASCRIPT_CMD}" "${AUTOSTART_SCRIPT}" && grep -Fxq "${GPIO_POWEROFF_CONFIG}" "${PICONFIG_FILE}" && [ -f "${SCRIPT_FOLDER}/safe_shutdown.py" ]
 then
     cd "${TMP_DIR}"
     rm -r ${GIT_NAME}-master/
