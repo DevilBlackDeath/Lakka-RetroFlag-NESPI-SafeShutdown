@@ -3,7 +3,7 @@
 # Script Config
 TIMEZONE_FILE="/storage/.cache/timezone"
 DEFAULT_TIMEZONE="America/Regina"
-GIT_NAME="lakka-retroflag-nespi-safeshutdown"
+GIT_NAME="Lakka-RetroFlag-NESPI-SafeShutdown"
 MASTER_ARCHIVE_FILE="${GIT_NAME}.zip"
 MASTER_ARCHIVE_URL="https://github.com/DevilBlackDeath/${GIT_NAME}/archive/master.zip"
 AUTOSTART_SCRIPT="/storage/.config/autostart.sh"
