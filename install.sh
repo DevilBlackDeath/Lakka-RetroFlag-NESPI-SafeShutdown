@@ -3,10 +3,16 @@
 # Script Config
 TIMEZONE_FILE="/storage/.cache/timezone"
 DEFAULT_TIMEZONE="America/Regina"
-MASTER_ARCHIVE_URL="https://github.com/halsafar/lakka-retroflag-safe-shutdown/archive/master.zip"
-MASTER_ARCHIVE_FILE="lakka-retroflag-safe-shutdown-master.zip"
+GIT_NAME="lakka-retroflag-nespi-safeshutdown"
+MASTER_ARCHIVE_FILE=${GIT_NAME}.zip
+MASTER_ARCHIVE_URL="https://github.com/DevilBlackDeath/${GIT_NAME}/archive/master.zip"
 AUTOSTART_SCRIPT="/storage/.config/autostart.sh"
 TMP_DIR="/storage/.tmp"
+PYTHON_LAKKASCRIPT_CMD="(cd /storage/scripts && python /storage/scripts/safe_shutdown.py &)"
+GPIO_POWEROFF_CONFIG="dtoverlay=gpio-poweroff,gpiopin=4,active_low=1,input=1"
+SCRIPT_FOLDER="/storage/scripts"
+CONFLICT_README="conflict.txt"
+PICONFIG_FILE="/flash/config.txt"
 
 # On Lakka the default user id is 0
 if ! [ $(id -u) = 0 ]; then
@@ -21,28 +27,38 @@ echo "Using timezone ${USER_TIMEZONE}"
 echo "TIMEZONE=${USER_TIMEZONE}" > "${TIMEZONE_FILE}"
 
 # Download scripts
+mkdir -p "${TMP_DIR}"
 cd "${TMP_DIR}"
 wget -O "${MASTER_ARCHIVE_FILE}" "${MASTER_ARCHIVE_URL}"
 
 # Install scripts
 unzip -o "${MASTER_ARCHIVE_FILE}"
-cd lakka-retroflag-safe-shutdown/
+rm "${MASTER_ARCHIVE_FILE}"
+cd ${GIT_NAME}-master/
 mkdir -p /storage/scripts
-cp -R scripts/* /storage/scripts/
+(shopt -s dotglob; mv ./scripts/* /storage/scripts/) 
 
 # Set autostart
-if [ ! -f "${AUTOSTART_SCRIPT}" ]; then
-    echo "(cd /storage/scripts && python /storage/scripts/safe_shutdown.py &)" >> "${AUTOSTART_SCRIPT}"
-fi
+echo "${PYTHON_LAKKASCRIPT_CMD}" >> "${AUTOSTART_SCRIPT}"
+
+# Writing GPIO poweroff informations
+mount -o remount, rw /flash
+echo "Setting up overlay configuration for shutdown"
+printf '' '# Overlay setup for proper powercut, needed for Retroflag cases' >> "${PICONFIG_FILE}"
+echo "${GPIO_POWEROFF_CONFIG}" >> "${PICONFIG_FILE}"
+mount -o remount,ro /flash
 
 # Check success
-if grep -Fxq "safe_shutdown.py" "${AUTOSTART_SCRIPT}"
+if grep -Fxq "${PYTHON_LAKKASCRIPT_CMD}" "${AUTOSTART_SCRIPT}" && grep -Fxq "${GPIO_POWEROFF_CONFIG}" "${PICONFIG_FILE}"
 then
-	echo "Error installing scripts, autostart configuration failed..."
-	echo "Manually place 'python /storage/scripts/safe_shutdown.py &' in ${AUTOSTART_SCRIPT}"
-else
+    cd "${TMP_DIR}"
+    rm -r ${GIT_NAME}-master/
     echo "Success installing scripts."
-	echo "Will now reboot after 3 seconds."
-	sleep 3
-	reboot
+    echo "Will now reboot after 3 seconds."
+    rm $0
+    sleep 3
+    reboot
+else
+	echo "Error installing scripts, autostart configuration failed..."
+	echo "Manually write '${PYTHON_LAKKASCRIPT_CMD}' in ${AUTOSTART_SCRIPT} and/or fix conflicts in ${PICONFIG_FILE} (see ${CONFLICT_README})"
 fi
