@@ -2,8 +2,6 @@ import os
 from multiprocessing import Process
 import sys
 import time
-
-sys.path.append('./lib')
 import RPi.GPIO as GPIO
 
 
@@ -23,6 +21,7 @@ def init():
     GPIO.setup(PIN_POWER, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.setup(PIN_RESET, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.setup(PIN_LED, GPIO.OUT)
+    GPIO.output(PIN_LED, GPIO.HIGH)
     GPIO.setup(PIN_POWEREN, GPIO.OUT)
     GPIO.output(PIN_POWEREN, GPIO.HIGH)
     GPIO.setwarnings(False)
