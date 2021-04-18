@@ -39,7 +39,7 @@ mkdir -p /storage/scripts
 mv ./scripts/* /storage/scripts/
 
 # Set autostart
-echo eval "${PYTHON_LAKKASCRIPT_CMD}" >> "${AUTOSTART_SCRIPT}"
+echo "${PYTHON_LAKKASCRIPT_CMD}" >> "${AUTOSTART_SCRIPT}"
 
 # Writing GPIO poweroff informations
 mount -o remount, rw /flash
