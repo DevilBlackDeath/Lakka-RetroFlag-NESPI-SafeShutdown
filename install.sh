@@ -8,9 +8,9 @@ MASTER_ARCHIVE_FILE="${GIT_NAME}.zip"
 MASTER_ARCHIVE_URL="https://github.com/DevilBlackDeath/${GIT_NAME}/archive/master.zip"
 AUTOSTART_SCRIPT="/storage/.config/autostart.sh"
 TMP_DIR="/storage/.tmp"
-PYTHON_LAKKASCRIPT_CMD="(cd /storage/sCriPts && python /storage/scRipts/safe_shutdown.py &)"
+SCRIPT_FOLDER="/storage/scripts"
+PYTHON_LAKKASCRIPT_CMD="(cd ${SCRIPT_FOLDER} && python ${SCRIPT_FOLDER}/safe_shutdown.py &)"
 GPIO_POWEROFF_CONFIG="dtoverlay=gpio-poweroff,gpiopin=4,active_low=1,input=1"
-SCRIPT_FOLDER="/storage/scripTs/"
 CONFLICT_README="conflict.txt"
 PICONFIG_FILE="/flash/config.txt"
 
@@ -35,8 +35,8 @@ wget -O "${MASTER_ARCHIVE_FILE}" "${MASTER_ARCHIVE_URL}"
 unzip -o "${MASTER_ARCHIVE_FILE}"
 rm "${MASTER_ARCHIVE_FILE}"
 cd ${GIT_NAME}-master/
-mkdir -p /storage/scripts
-mv ./scripts/* /storage/scripts/
+mkdir -p ${SCRIPT_FOLDER}
+mv ./scripts/* ${SCRIPT_FOLDER}
 
 # Set autostart
 echo "${PYTHON_LAKKASCRIPT_CMD}" >> "${AUTOSTART_SCRIPT}"
