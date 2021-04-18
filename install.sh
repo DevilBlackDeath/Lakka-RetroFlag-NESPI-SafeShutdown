@@ -56,10 +56,10 @@ mount -o remount,ro /flash
 
 # Check success
 if grep -Fxq "${PYTHON_LAKKASCRIPT_CMD}" "${AUTOSTART_SCRIPT}" && grep -Fxq "${GPIO_POWEROFF_CONFIG}" "${PICONFIG_FILE}" && [ -f "${SCRIPT_FOLDER}/safe_shutdown.py" ]; then
-    cd "${TMP_DIR}"
-    rm -r ${GIT_NAME}-master/
     echo "Success installing scripts."
     echo "Will now reboot after 3 seconds."
+    cd "${TMP_DIR}"
+    rm -r ${GIT_NAME}-master/
     cd "${SCRIPT_ABS_LOCATION}"
     rm $0
     sleep 3
