@@ -23,7 +23,7 @@ Works on NESPi 4 only with Lakka nightlies dating ??? (pull request still in pro
    
 1. Type :
    
-   `wget -O - "https://github.com/DevilBlackDeath/lakka-retroflag-nespi-safeshutdown/raw/master/install.sh" | bash`
+   `curl -L "https://github.com/DevilBlackDeath/lakka-retroflag-nespi-safeshutdown/raw/master/install.sh" > lakka_retroflag_install.sh; bash lakka_retroflag_install.sh`
 
 # Credits
 This is an updated version of the forked repository :
