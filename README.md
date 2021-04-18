@@ -24,6 +24,9 @@ Works on NESPi 4 only with Lakka nightlies dating ??? (pull request still in pro
 1. Type :
    
    `cd ~; curl -L "https://github.com/DevilBlackDeath/lakka-retroflag-nespi-safeshutdown/raw/master/install.sh" > lakka_retroflag_install.sh; bash lakka_retroflag_install.sh`
+   
+1. When asked about your timezone, refer to the "TZ database name" column in the following link :
+- https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 # Credits
 This is an updated version of the forked repository :
