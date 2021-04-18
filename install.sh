@@ -15,7 +15,6 @@ CONFLICT_README="conflict.txt"
 PICONFIG_FILE="/flash/config.txt"
 
 SCRIPT_ABS_LOCATION="$(dirname $(readlink -f "${0}"))"
-echo "Location : ${SCRIPT_ABS_LOCATION}"
 
 # On Lakka the default user id is 0
 if ! [ $(id -u) = 0 ]; then
@@ -64,7 +63,7 @@ if grep -Fxq "${PYTHON_LAKKASCRIPT_CMD}" "${AUTOSTART_SCRIPT}" && grep -Fxq "${G
     cd "${SCRIPT_ABS_LOCATION}"
     rm $0
     sleep 3
-    # reboot
+    reboot
 else
 	echo "Error installing scripts, autostart configuration failed..."
 	echo "Manually write '${PYTHON_LAKKASCRIPT_CMD}' in ${AUTOSTART_SCRIPT}, if this still doesn't work, the script didn't copy properly, please rerun the installation script, as indicated on the project's README. If this still fails, report an issue on the repository with as much details as possible"
