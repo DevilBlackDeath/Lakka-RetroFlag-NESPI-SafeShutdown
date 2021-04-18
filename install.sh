@@ -39,18 +39,21 @@ mkdir -p ${SCRIPT_FOLDER}
 mv ./scripts/* ${SCRIPT_FOLDER}
 
 # Set autostart
-echo "${PYTHON_LAKKASCRIPT_CMD}" >> "${AUTOSTART_SCRIPT}"
+if ! grep -Fxq "${PYTHON_LAKKASCRIPT_CMD}" "${AUTOSTART_SCRIPT}"; then
+    echo "${PYTHON_LAKKASCRIPT_CMD}" >> "${AUTOSTART_SCRIPT}"
+fi
 
 # Writing GPIO poweroff informations
 mount -o remount, rw /flash
-echo "Setting up overlay configuration for shutdown"
-printf '' '# Overlay setup for proper powercut, needed for Retroflag cases' >> "${PICONFIG_FILE}"
-echo "${GPIO_POWEROFF_CONFIG}" >> "${PICONFIG_FILE}"
+if ! grep -Fxq "${GPIO_POWEROFF_CONFIG}" "${PICONFIG_FILE}"; then
+    echo "Setting up overlay configuration for shutdown"
+    printf '' '# Overlay setup for proper powercut, needed for Retroflag cases' >> "${PICONFIG_FILE}"
+    echo "${GPIO_POWEROFF_CONFIG}" >> "${PICONFIG_FILE}"
+fi
 mount -o remount,ro /flash
 
 # Check success
-if grep -Fxq "${PYTHON_LAKKASCRIPT_CMD}" "${AUTOSTART_SCRIPT}" && grep -Fxq "${GPIO_POWEROFF_CONFIG}" "${PICONFIG_FILE}" && [ -f "${SCRIPT_FOLDER}/safe_shutdown.py" ]
-then
+if grep -Fxq "${PYTHON_LAKKASCRIPT_CMD}" "${AUTOSTART_SCRIPT}" && grep -Fxq "${GPIO_POWEROFF_CONFIG}" "${PICONFIG_FILE}" && [ -f "${SCRIPT_FOLDER}/safe_shutdown.py" ] then
     cd "${TMP_DIR}"
     rm -r ${GIT_NAME}-master/
     echo "Success installing scripts."
@@ -61,5 +64,5 @@ then
     reboot
 else
 	echo "Error installing scripts, autostart configuration failed..."
-	echo "Manually write '${PYTHON_LAKKASCRIPT_CMD}' in ${AUTOSTART_SCRIPT} and/or fix conflicts in ${PICONFIG_FILE} (see ${CONFLICT_README})"
+	echo "Manually write '${PYTHON_LAKKASCRIPT_CMD}' in ${AUTOSTART_SCRIPT}, if this still doesn't work, the script didn't copy properly, please rerun the installation script, as indicated on the project's README. If this still fails, report an issue on the repository with as much details as possible"
 fi
