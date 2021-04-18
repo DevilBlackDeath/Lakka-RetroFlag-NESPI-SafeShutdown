@@ -59,7 +59,7 @@ if grep -Fxq "${PYTHON_LAKKASCRIPT_CMD}" "${AUTOSTART_SCRIPT}" && grep -Fxq "${G
     echo "Success installing scripts."
     echo "Will now reboot after 3 seconds."
     echo "$(dirname "${0}")"
-    cd "$(dirname "${0]")"
+    cd "$(dirname "${0}")"
     rm $0
     sleep 3
     # reboot
