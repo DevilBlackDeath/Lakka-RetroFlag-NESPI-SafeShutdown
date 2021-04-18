@@ -58,11 +58,13 @@ if grep -Fxq "${PYTHON_LAKKASCRIPT_CMD}" "${AUTOSTART_SCRIPT}" && grep -Fxq "${G
     rm -r ${GIT_NAME}-master/
     echo "Success installing scripts."
     echo "Will now reboot after 3 seconds."
+    echo "$(dirname "${BASH_SOURCE[0]}")"
     cd "$(dirname "${BASH_SOURCE[0]}")"
     rm $0
     sleep 3
-    reboot
+    # reboot
 else
 	echo "Error installing scripts, autostart configuration failed..."
 	echo "Manually write '${PYTHON_LAKKASCRIPT_CMD}' in ${AUTOSTART_SCRIPT}, if this still doesn't work, the script didn't copy properly, please rerun the installation script, as indicated on the project's README. If this still fails, report an issue on the repository with as much details as possible"
 fi
+
