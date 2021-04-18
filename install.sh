@@ -14,6 +14,8 @@ GPIO_POWEROFF_CONFIG="dtoverlay=gpio-poweroff,gpiopin=4,active_low=1,input=1"
 CONFLICT_README="conflict.txt"
 PICONFIG_FILE="/flash/config.txt"
 
+SCRIPT_ABS_LOCATION=dirname "$(realpath $0)"
+
 # On Lakka the default user id is 0
 if ! [ $(id -u) = 0 ]; then
    echo "Please execute script as root (on Lakka this should be the default user)." 
@@ -58,8 +60,7 @@ if grep -Fxq "${PYTHON_LAKKASCRIPT_CMD}" "${AUTOSTART_SCRIPT}" && grep -Fxq "${G
     rm -r ${GIT_NAME}-master/
     echo "Success installing scripts."
     echo "Will now reboot after 3 seconds."
-    echo "$(realpath "${0}")"
-    cd "$(realpath "${0}")"
+    cd "${SCRIPT_ABS_LOCATION}"
     rm $0
     sleep 3
     # reboot
