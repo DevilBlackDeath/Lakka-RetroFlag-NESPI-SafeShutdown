@@ -55,6 +55,7 @@ then
     rm -r ${GIT_NAME}-master/
     echo "Success installing scripts."
     echo "Will now reboot after 3 seconds."
+    cd "${0%/*}"
     rm $0
     sleep 3
     reboot
