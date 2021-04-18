@@ -14,7 +14,7 @@ GPIO_POWEROFF_CONFIG="dtoverlay=gpio-poweroff,gpiopin=4,active_low=1,input=1"
 CONFLICT_README="conflict.txt"
 PICONFIG_FILE="/flash/config.txt"
 
-SCRIPT_ABS_LOCATION=dirname "${CUR_DIR}/${0}"
+SCRIPT_ABS_LOCATION=$(dirname $(readlink -f "${0}"))
 echo ${SCRIPT_ABS_LOCATION}
 
 # On Lakka the default user id is 0
