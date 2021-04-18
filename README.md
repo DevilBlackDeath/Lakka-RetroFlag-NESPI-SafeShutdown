@@ -5,6 +5,10 @@ Works on NESPi 4 only with Lakka nightlies dating ??? (pull request still in pro
 
 # How to install
 
+## Enable Safe Shutdown on your NESPI case
+
+- Enable the Safe Shutdown switch on your NESPI case as indicated by the manufacturer.
+
 ## Enable SSH In Lakka
 1. Boot up Lakka
 1. Connect your Raspberry Pi to the internet through either LAN or WiFi
