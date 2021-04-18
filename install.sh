@@ -58,8 +58,8 @@ if grep -Fxq "${PYTHON_LAKKASCRIPT_CMD}" "${AUTOSTART_SCRIPT}" && grep -Fxq "${G
     rm -r ${GIT_NAME}-master/
     echo "Success installing scripts."
     echo "Will now reboot after 3 seconds."
-    echo "$(dirname "${BASH_SOURCE[0]}")"
-    cd "$(dirname "${BASH_SOURCE[0]}")"
+    echo "$(dirname "${0}")"
+    cd "$(dirname "${0]")"
     rm $0
     sleep 3
     # reboot
