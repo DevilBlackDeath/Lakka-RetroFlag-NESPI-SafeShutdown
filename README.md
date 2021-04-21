@@ -1,7 +1,7 @@
 # Lakka Retroflag NESPi 4 Safe-Shutdown Script
 Simple script to setup a safe shutdown on Lakka+RetroFlag
 
-Works on NESPi 4 only with Lakka nightlies dating ??? (pull request still in progress, once RPi.GPIO is officially included in Lakka, this script will work, for now you need a custom built Lakka, you can find the source of that custom build in my own forked Lakka-LIBREELEC)
+Works on NESPi 4 only with Lakka nightlies dating 04/21 and afterwards. Lakka 3.0 should also work once it releases.
 
 # How to install
 
@@ -36,7 +36,7 @@ Works on NESPi 4 only with Lakka nightlies dating ??? (pull request still in pro
 This is an updated version of the forked repository :
 - https://github.com/halsafar/lakka-retroflag-safe-shutdown
 
-It is updated to work with recent nightly builds of Lakka, including aarch64 ones, and to properly cut-off power on shutdown.
+It is updated to work with recent nightly builds of Lakka, including aarch64 ones, and to properly cut-off power on shutdown.Feel free to fork or copy this for your own needs, be it other Raspberry Pi cases with GPIO functionalities, futue Retroflag products compatibility, whatever else... :)
 
 The original is a cleaned up version of:
 - https://github.com/thiagoauler/lakka_nespi_power
